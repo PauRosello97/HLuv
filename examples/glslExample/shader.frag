@@ -1,6 +1,3 @@
-// Author:
-// Title:
-
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -37,7 +34,7 @@ vec2 st;
 vec3 generateColor(float hue, float luminance){
     
     float S = 0.;
-	float L = kL * sqrt(luminance*100.);
+	float L = kL * sqrt(luminance);
     
     float H = hue + 19.06;
     
@@ -94,12 +91,12 @@ void main() {
     st = gl_FragCoord.xy/u_resolution.xy;
     st.x *= u_resolution.x/u_resolution.y;
     
-    float hue = st.x*360.;
+    float hue = st.x;
     float luminance = st.y;
     
     vec3 color = vec3(luminance);
 
-    color = generateColor(hue , luminance); 
+    color = generateColor(hue*360. , luminance*100.); 
     
 
     gl_FragColor = vec4(color,1.0);
